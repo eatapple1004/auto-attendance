@@ -18,5 +18,5 @@ class LocationVO {
     getTypeByName(name) {
       return this.nameAndTypeMap.get(name);
     }
-  }
+}
   
