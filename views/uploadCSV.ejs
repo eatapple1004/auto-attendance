@@ -6,8 +6,19 @@
 </head>
 <body>
   <h1>CSV 파일 업로드</h1>
+
   <form action="/upload" method="post" enctype="multipart/form-data">
+    <!-- 년도 입력 -->
+    <label for="year">년도:</label>
+    <input type="number" id="year" name="year" min="2000" max="2100" required />
+
+    <!-- 월 입력 -->
+    <label for="month">월:</label>
+    <input type="number" id="month" name="month" min="1" max="12" required />
+
+    <!-- CSV 파일 선택 -->
     <input type="file" name="csvFile" accept=".csv" required />
+
     <button type="submit">업로드</button>
   </form>
 </body>
