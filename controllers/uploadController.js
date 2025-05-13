@@ -12,6 +12,8 @@ exports.handleUpload = (req, res) => {
     return res.status(400).send('❌ year, month, file은 필수입니다.');
   }
 
+  console.log("year :: " + year + ", month :: " + month + ", file ::" + file.originalname);
+
   // 서비스 계층으로 위임
   uploadService.processUpload({ year, month, file });
 
