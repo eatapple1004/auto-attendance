@@ -1,7 +1,7 @@
 class DayVO {
     constructor(locationList = [], date = '') {
       this.locationList = locationList; // LocationVO[]
-      this.date = date;                 // string or Date
+      this.date = date;                 // string day data
     }
   
     // 선택: LocationVO 하나 추가

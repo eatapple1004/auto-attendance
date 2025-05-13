@@ -1,7 +1,8 @@
 class LocationVO {
     constructor(nameAndTypeMap = new Map(), location = '') {
       this.nameAndTypeMap = nameAndTypeMap; // Map<string, string>
-      this.location = location;             // string 또는 객체
+      this.location       = location;       // string 또는 객체
+      this.date           = date;           // day data
     }
   
     // 선택: name/type 추가 헬퍼 메서드
@@ -17,6 +18,10 @@ class LocationVO {
     // 선택: 특정 name의 type 반환
     getTypeByName(name) {
       return this.nameAndTypeMap.get(name);
+    }
+
+    setDate(dateStr) {
+        this.date = dateStr;
     }
 }
   
