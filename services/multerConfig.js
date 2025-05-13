@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    const uniqueName = Date.now() + '_카카오톡 채팅 내역.csv';
+    const uniqueName = Date.now() + '_uploaded.csv';
     cb(null, uniqueName);
   },
 });

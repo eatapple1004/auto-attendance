@@ -1,5 +1,5 @@
 class LocationVO {
-    constructor(nameAndTypeMap = new Map(), location = '') {
+    constructor(nameAndTypeMap = new Map(), location = '', date = '') {
       this.nameAndTypeMap = nameAndTypeMap; // Map<string, string>
       this.location       = location;       // string 또는 객체
       this.date           = date;           // day data
@@ -24,4 +24,5 @@ class LocationVO {
         this.date = dateStr;
     }
 }
-  
+
+module.exports = LocationVO;
