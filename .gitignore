@@ -1,6 +1,9 @@
 # Node modules
 node_modules/
 
+# 실제 근무 데이터
+uploads/
+
 # macOS 시스템 파일
 .DS_Store
 
