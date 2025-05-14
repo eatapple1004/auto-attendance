@@ -15,3 +15,4 @@ class DayVO {
     }
 }
   
+module.exports = DayVO;
