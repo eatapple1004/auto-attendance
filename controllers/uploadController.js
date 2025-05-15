@@ -14,8 +14,8 @@ exports.handleUpload = (req, res) => {
 
   //console.log("year :: " + year + ", month :: " + month + ", file ::" + file.originalname);
 
-  // 서비스 계층으로 위임
-  uploadService.processUpload({ year, month, file });
+  // 1. input데이터 파싱 작업
+  const dayVOList = uploadService.processUpload({ year, month, file });
 
   res.send('✅ 업로드 완료. 콘솔을 확인하세요.');
 };
