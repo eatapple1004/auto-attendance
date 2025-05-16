@@ -17,12 +17,12 @@ class RecordVO {
       const day    = inputDay;
       const status = inputStatus;
   
-      if (!status) return;
+      if (!status || status == "정상출근") return;
   
       const push = (arr, val) => {
         if (!arr.includes(val)) arr.push(val);
       };
-  
+
       switch (status) {
         case '휴무':      push(this.leave, day);               break;
         case '연가':      push(this.vacation, day);            break;

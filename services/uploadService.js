@@ -49,6 +49,7 @@ function parseCsvFile(filePath, userYear, userMonth) {
             //console.log(userMonthInFormat + ", " + month);
             if(userYear != year || userMonthInFormat != month) return;
             console.log(valuableText);
+            console.log("---");
             const lines = columnC.split('\n').slice(1).filter(Boolean);
 
             const nameAndTypeMap = new Map();
@@ -56,8 +57,9 @@ function parseCsvFile(filePath, userYear, userMonth) {
             lines.forEach(line => {
                 const [name, ...statusParts] = line.split('/');
                 const statusText = statusParts.join('/').trim();
+                if (/^\d/.test(name)) return;
 
-                nameAndTypeMap.set(name, nameAndTypeMap);
+                nameAndTypeMap.set(name, statusText);
             });
             
             const locationVO = new LocationVO(nameAndTypeMap, location, day, time);
@@ -69,8 +71,6 @@ function parseCsvFile(filePath, userYear, userMonth) {
         })
         .on('end', () => {
             const newLocationVOjMap = new Map();
-
-            
 
             for (const [key, locationVOList] of dayLocationVOMap.entries()) {
                 const locationMap = new Map();
