@@ -1,5 +1,5 @@
 const uploadService = require('../services/uploadService');
-
+const parseOutput = require('../services/parseOutput');
 exports.renderUploadPage = (req, res) => {
   res.render('uploadCSV');
 };
@@ -18,6 +18,7 @@ exports.handleUpload = async (req, res) => {
   const monthVO = await uploadService.processUpload({ year, month, file });
   
   // 2. output 데이터 파싱 작업
-
+  parseOutput.parseOutputData(monthVO);
+  
   res.send('✅ 업로드 완료. 콘솔을 확인하세요.');
 };

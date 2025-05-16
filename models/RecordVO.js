@@ -13,9 +13,9 @@ class RecordVO {
       this.etc           = []; // 기타
     }
   
-    mergeDay(singleDayVO) {
-      const day    = singleDayVO.day;
-      const status = singleDayVO.status;
+    mergeDay(inputDay, inputStatus) {
+      const day    = inputDay;
+      const status = inputStatus;
   
       if (!status) return;
   
