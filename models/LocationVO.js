@@ -5,7 +5,15 @@ class LocationVO {
       this.date           = date;           // day data
       this.time           = time;
     }
-  
+    
+    getLocation() {
+      return this.location;
+    }
+
+    getNameAndTypeMap() {
+      return this.nameAndTypeMap;
+    }
+
     // 선택: name/type 추가 헬퍼 메서드
     addNameType(name, type) {
       this.nameAndTypeMap.set(name, type);

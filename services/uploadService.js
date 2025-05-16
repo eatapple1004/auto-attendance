@@ -2,20 +2,13 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const LocationVO = require('../models/LocationVO');
 const DayVO      = require('../models/DayVO');
+const MonthVO    = require('../models/MonthVO');
 
-exports.processUpload = ({ year, month, file }) => {
-    const userInputYear = year;
-    const userInputMonth = month;  
-    
-    parseCsvFile(file.path, year, month);
-
-    //const location = "";
-    //const nameAndTypeMap = new Map(); // CSV 파싱은 추후
-
-    //const locationVO = new LocationVO(nameAndTypeMap, location);
-
-    //console.log('📦 LocationVO 객체:', locationVO);
-    //console.log('📁 파일 경로:', file.path);
+exports.processUpload = async ({ year, month, file }) => {
+    const dayVOList = await parseCsvFile(file.path, year, month);
+    const monthVO = new MonthVO(dayVOList, year, month);
+    console.log(monthVO);
+    return monthVO;
 };
 
 function trimBeforeDateLine(text) {
@@ -31,8 +24,8 @@ function trimBeforeDateLine(text) {
 
 function parseCsvFile(filePath, userYear, userMonth) {
     return new Promise((resolve, reject) => {
-        const results = [];
-        
+        //const results = [];
+        const DayVOList = [];
         const dayLocationVOMap = new Map();
 
         fs.createReadStream(filePath)
@@ -77,7 +70,7 @@ function parseCsvFile(filePath, userYear, userMonth) {
         .on('end', () => {
             const newLocationVOjMap = new Map();
 
-            const DayVOList = [];
+            
 
             for (const [key, locationVOList] of dayLocationVOMap.entries()) {
                 const locationMap = new Map();
@@ -106,7 +99,7 @@ function parseCsvFile(filePath, userYear, userMonth) {
                 DayVOList.push(dayVO)
             }
             console.log("--------------");
-            console.log(DayVOList);
+            //console.log(DayVOList);
 
             resolve(DayVOList);
         })

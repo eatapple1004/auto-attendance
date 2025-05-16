@@ -4,7 +4,19 @@ class MonthVO {
       this.year = year;       // number
       this.month = month;     // number (1~12)
     }
-  
+    
+    getDayList() {
+      return this.dayList;
+    }
+
+    getYear() {
+      return this.year;
+    }
+
+    getMonth() {
+      return this.month;
+    }
+
     // 선택: DayVO 추가
     addDayVO(dayVO) {
       this.dayList.push(dayVO);
@@ -16,4 +28,5 @@ class MonthVO {
       this.month = month;
     }
 }
-  
+
+module.exports = MonthVO;

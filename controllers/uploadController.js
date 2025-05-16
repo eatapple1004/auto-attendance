@@ -4,7 +4,7 @@ exports.renderUploadPage = (req, res) => {
   res.render('uploadCSV');
 };
 
-exports.handleUpload = (req, res) => {
+exports.handleUpload = async (req, res) => {
   const { year, month } = req.body;
   const file = req.file;
 
@@ -15,7 +15,9 @@ exports.handleUpload = (req, res) => {
   //console.log("year :: " + year + ", month :: " + month + ", file ::" + file.originalname);
 
   // 1. input데이터 파싱 작업
-  const dayVOList = uploadService.processUpload({ year, month, file });
+  const monthVO = await uploadService.processUpload({ year, month, file });
+  
+  // 2. output 데이터 파싱 작업
 
   res.send('✅ 업로드 완료. 콘솔을 확인하세요.');
 };

@@ -4,6 +4,10 @@ class DayVO {
       this.date = date;                 // string day data
     }
   
+    getLocationList() {
+      return this.locationList;
+    }
+
     // 선택: LocationVO 하나 추가
     addLocationVO(locationVO) {
       this.locationList.push(locationVO);
