@@ -1,5 +1,6 @@
 const uploadService = require('../services/uploadService');
 const parseOutput = require('../services/parseOutput');
+const exportParsedService = require('../services/exportParsedService')
 exports.renderUploadPage = (req, res) => {
   res.render('uploadCSV');
 };
@@ -20,6 +21,9 @@ exports.handleUpload = async (req, res) => {
   // 2. output 데이터 파싱 작업
   const recordVOList = parseOutput.parseOutputData(monthVO);
   console.log(recordVOList);
-  
+
+  // 3. recordVO to excel file
+  exportParsedService.exportParsed(recordVOList);
+
   res.send('✅ 업로드 완료. 콘솔을 확인하세요.');
 };
