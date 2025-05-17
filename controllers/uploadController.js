@@ -13,8 +13,6 @@ exports.handleUpload = async (req, res) => {
     return res.status(400).send('❌ year, month, file은 필수입니다.');
   }
 
-  //console.log("year :: " + year + ", month :: " + month + ", file ::" + file.originalname);
-
   // 1. input데이터 파싱 작업
   const monthVO = await uploadService.processUpload({ year, month, file });
   
@@ -22,7 +20,10 @@ exports.handleUpload = async (req, res) => {
   const recordVOList = parseOutput.parseOutputData(monthVO);
   console.log(recordVOList);
 
-  // 3. recordVO to excel file
+  // 3. 월요일 정기 휴무, 교육 체크, 변수 설정들
+  
+
+  // 4. recordVO to excel file
   exportParsedService.exportParsed(recordVOList);
 
   res.send('✅ 업로드 완료. 콘솔을 확인하세요.');
