@@ -1,6 +1,6 @@
 const RecordVO = require('../models/RecordVO');
 
-exports.parseOutputData = (monthVO) => {
+exports.makeOutputData = (monthVO) => {
 
     const recordVOList = makeRecordVOList(monthVO);
     return recordVOList;

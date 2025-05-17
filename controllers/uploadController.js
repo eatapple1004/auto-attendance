@@ -1,5 +1,5 @@
 const uploadService = require('../services/uploadService');
-const parseOutput = require('../services/parseOutput');
+const makeOutput = require('../services/makeOutput');
 const exportParsedService = require('../services/exportParsedService')
 exports.renderUploadPage = (req, res) => {
   res.render('uploadCSV');
@@ -17,11 +17,10 @@ exports.handleUpload = async (req, res) => {
   const monthVO = await uploadService.processUpload({ year, month, file });
   
   // 2. output 데이터 파싱 작업
-  const recordVOList = parseOutput.parseOutputData(monthVO);
-  console.log(recordVOList);
-
-  // 3. 월요일 정기 휴무, 교육 체크, 변수 설정들
+  const recordVOList = makeOutput.parseOutputData(monthVO);
   
+  // 3. 월요일 정기 휴무, 교육 체크, 변수 설정들
+  const parsedRecordVOList = 
 
   // 4. recordVO to excel file
   exportParsedService.exportParsed(recordVOList);
