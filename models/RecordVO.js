@@ -40,12 +40,12 @@ class RecordVO {
         '년.월':    `${this.year}.${this.month}`,
         '역':       this.location,
         '이름':     this.name,
-        '휴무':     this.leave.join(','),
-        '연가':     this.vacation.join(','),
-        '오전 반가': this.morningHalf.join(','),
-        '오후 반가': this.afternoonHalf.join(','),
-        '병가':     this.sick.join(','),
-        '기타':     this.etc.join(',')
+        '휴무':     this.leave.join(', '),
+        '연가':     this.vacation.join(', '),
+        '오전 반가': this.morningHalf.join(', '),
+        '오후 반가': this.afternoonHalf.join(', '),
+        '병가':     this.sick.join(', '),
+        '기타':     this.etc.join(', ')
       };
     }
   }

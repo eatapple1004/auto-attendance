@@ -2,8 +2,9 @@ const RecordVO = require('../models/RecordVO');
 
 exports.parseOutputData = (recordVOList, year, month) => {
 
-    const parcedRecordVOList = checkMonday(recordVOList, year, month);
-    return parcedRecordVOList;
+    const mondayCheckedRecordVOList = checkMonday(recordVOList, year, month);
+    const halfCheckedRecordVOList = checkHalf(mondayCheckedRecordVOList);
+    return halfCheckedRecordVOList;
 }
 
 function checkMonday(recordVOList, year, month) {
@@ -68,3 +69,39 @@ function getMondaysInMonth(year, month) {
   
     return mondays;
   }
+
+// 반차 type 2차 확인 - 오전, 오후
+function checkHalf(recordVOList) {
+
+    for(const recordVO of recordVOList) {
+
+        let isChanged = false;
+
+        for(const etcText of recordVO.etc) {
+            if(etcText.includes('반차')) {
+                // 마지막 괄호의 2자리 숫자만 추출
+                const day = text.match(/\((\d{2})\)[^\(]*$/); 
+                
+                if(etcText.includes('오전')) {
+                    // 마지막 괄호의 2자리 숫자만 추출
+                    recordVO.morningHalf.push(day);
+                    isChanged = true;
+                    continue;
+                }
+                else if(etcText.includes('오후')) {
+                    recordVO.afternoonHalf.push(day);
+                    isChanged = true;
+                    continue;
+                }
+
+            }
+        }
+
+        if(isChanged) {
+            recordVO.morningHalf.sort();
+            recordVO.afternoonHalf.sort();
+        }
+    }
+
+    return recordVOList;
+}
