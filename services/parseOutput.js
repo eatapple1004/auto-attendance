@@ -3,7 +3,7 @@ const RecordVO = require('../models/RecordVO');
 exports.parseOutputData = (recordVOList, year, month) => {
 
     const mondayCheckedRecordVOList = checkMonday(recordVOList, year, month);
-    const halfCheckedRecordVOList = checkHalf(mondayCheckedRecordVOList);
+    const halfCheckedRecordVOList   = checkHalf(mondayCheckedRecordVOList);
     return halfCheckedRecordVOList;
 }
 
@@ -14,11 +14,14 @@ function checkMonday(recordVOList, year, month) {
     for(const recordVO of recordVOList) {
         
         // 월요일 휴무 입력
-        recordVO.leave.push(mondayList);
+        for(const monday of mondayList) {
+            recordVO.leave.push(monday);
+        }
+        
 
         // 숫자 순서 맞추기
         recordVO.leave.sort();
-
+        
         // 교육 체크 및 월요일 휴뮤 제외 처리
         for(const etcText of recordVO.etc) {
             if (etcText.includes('교육')) {
@@ -66,9 +69,9 @@ function getMondaysInMonth(year, month) {
   
       date.setDate(date.getDate() + 1); // 하루씩 증가
     }
-  
+
     return mondays;
-  }
+}
 
 // 반차 type 2차 확인 - 오전, 오후
 function checkHalf(recordVOList) {
@@ -77,10 +80,12 @@ function checkHalf(recordVOList) {
 
         let isChanged = false;
 
+        const newEtcList = [];
+
         for(const etcText of recordVO.etc) {
             if(etcText.includes('반차')) {
                 // 마지막 괄호의 2자리 숫자만 추출
-                const day = text.match(/\((\d{2})\)[^\(]*$/); 
+                const day = etcText.match(/\((\d{2})\)[^\(]*$/)?.[1]; 
                 
                 if(etcText.includes('오전')) {
                     // 마지막 괄호의 2자리 숫자만 추출
@@ -93,9 +98,11 @@ function checkHalf(recordVOList) {
                     isChanged = true;
                     continue;
                 }
-
             }
+            newEtcList.push(etcText);
         }
+
+        recordVO.etc = newEtcList;
 
         if(isChanged) {
             recordVO.morningHalf.sort();
