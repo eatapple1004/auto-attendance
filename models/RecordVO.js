@@ -24,13 +24,13 @@ class RecordVO {
       };
 
       switch (status) {
-        case '휴무':      push(this.leave, day);               break;
-        case '연가':      push(this.vacation, day);            break;
-        case '오전 반가':  push(this.morningHalf, day);         break;
+        case '휴무':      push(this.leave,         day);       break;
+        case '연가':      push(this.vacation,      day);       break;
+        case '오전 반가':  push(this.morningHalf,   day);       break;
         case '오후 반가':  push(this.afternoonHalf, day);       break;
-        case '오전반가':   push(this.morningHalf, day);         break;
+        case '오전반가':   push(this.morningHalf,   day);       break;
         case '오후반가':   push(this.afternoonHalf, day);       break;
-        case '병가':      push(this.sick, day);                break;
+        case '병가':      push(this.sick,          day);       break;
         default:         push(this.etc, `${status}(${day})`); break;
       }
     }
